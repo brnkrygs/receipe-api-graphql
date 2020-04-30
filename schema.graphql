@@ -1,0 +1,44 @@
+type Query {
+  hello: String
+  name: String
+  recipes: [Recipe]
+  authors: [Author]
+  notes: [Note]
+}
+
+type Recipe {
+  id: ID!
+  title: String
+  steps: [RecipeStep]
+  author: Author
+  url(w:Int, h:Int): String
+  notes: [Note]
+}
+
+type RecipeStep{
+  id: ID!
+  step: Int
+  instructions: String
+  recipe: Recipe
+}
+
+type Author {
+  id: ID!
+  avatar: Avatar
+  name: String
+  website: String
+  recipes: [Recipe]
+}
+
+type Avatar {
+  id: ID!
+  url(w:Int, h:Int): String
+  alt: String
+}
+
+type Note {
+  id: ID!
+  title: String
+  body: String
+  recipe: Recipe
+}
