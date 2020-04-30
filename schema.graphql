@@ -1,24 +1,35 @@
 type Query {
-  hello: String
-  name: String
+  "The recipe collection"
   recipes: [Recipe]
+  "Get a specific recipe"
+  recipe( id: String! ): Recipe
+  "The author collection"
   authors: [Author]
+  "The notes collection"
   notes: [Note]
 }
 
+"""Define a recipe"""
 type Recipe {
   id: ID!
   title: String
+  name: String @deprecated( reason: "No longer used" )
+  "The steps involved in cooking the recipe"
   steps: [RecipeStep]
+  "The initial creator for the recipe"
   author: Author
+  "URL for the recipe"
   url(w:Int, h:Int): String
+  "User-created notes"
   notes: [Note]
 }
 
+"""A step in a recipe"""
 type RecipeStep{
   id: ID!
   step: Int
   instructions: String
+  "Parent recipe"
   recipe: Recipe
 }
 
@@ -26,7 +37,9 @@ type Author {
   id: ID!
   avatar: Avatar
   name: String
+  "Homepage for this Author"
   website: String
+  "The recipes this author has created"
   recipes: [Recipe]
 }
 
@@ -39,6 +52,8 @@ type Avatar {
 type Note {
   id: ID!
   title: String
+  "Details for the note"
   body: String
+  "Parent recipe"
   recipe: Recipe
 }

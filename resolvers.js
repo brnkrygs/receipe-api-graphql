@@ -14,6 +14,7 @@ const author1 = {
 const recipe1 = {
   id: '6efdaa71-90c5-4f13-9425-006bb68e2edf',
   title: 'Ribs',
+  name: 'old',
   url: args => url( args.w, args.h ),
   author: () => author1,
   notes: () => [note1],
@@ -35,11 +36,8 @@ const recipeStep1 = {
 };
 
 const resolvers = {
-  hello: () => {
-    return 'Hello world!';
-  },
-  name: 'my name',
   recipes: [recipe1],
+  recipe: args => recipe1,
   authors: [author1],
   notes: [note1]
 };
