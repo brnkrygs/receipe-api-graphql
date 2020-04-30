@@ -1,0 +1,35 @@
+query listRecipes{
+  recipes{
+    id
+  }
+}
+
+query listRecipesWithUrl{
+  recipes{
+    id
+    title
+    url(w:100,h:200)
+  }
+}
+
+query listRecipes{
+  recipes{
+    id
+    title
+    name
+  }
+}
+
+query listRecipesWithNotes{
+  recipes{
+    id
+    title
+    name
+    notes{
+      id
+      title
+      body
+    }
+  }
+}
+
