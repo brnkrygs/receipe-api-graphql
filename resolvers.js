@@ -1,3 +1,5 @@
+const sleep = require( 'sleep-promise' );
+
 function url( w, h ){
   return w && h ?
     `https://www.ostusa.com/?w=${w}&h=${h}` :
@@ -18,7 +20,10 @@ const recipe1 = {
   url: args => url( args.w, args.h ),
   author: () => author1,
   notes: () => [note1],
-  steps: () => [recipeStep1]
+  steps: async () => {
+    await sleep( 5000 );
+    return [recipeStep1];
+  }
 };
 
 const note1 = {
