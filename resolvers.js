@@ -1,31 +1,49 @@
 const sleep = require( 'sleep-promise' );
 
-function url( w, h ){
+function url( w, h, host ){
   return w && h ?
-    `https://www.ostusa.com/?w=${w}&h=${h}` :
-    'https://www.ostusa.com/';
+    `${host}{?w=${w}&h=${h}` :
+    host;
 }
 
 const author1 = {
   id: '95c5e2a5-30dd-4348-8ab3-aa2da90cdc29',
-  name: 'First Author',
+  nickname: 'The Chef',
   website: 'https://www.ostusa.com',
   recipes: () => [recipe1]
 };
 
+const author2 = {
+  id: '895c5e2a5-30dd-4348-8ab3-aa2da90cdc29',
+  nickname: 'The Other Chef',
+  website: 'https://www.ostusa.com',
+  recipes: () => []
+};
+
 const recipe1 = {
   id: '6efdaa71-90c5-4f13-9425-006bb68e2edf',
-  title: 'Ribs',
+  title: 'Brisket',
   name: 'old',
-  url: args => url( args.w, args.h ),
+  url: args => url( args.w, args.h, 'https://www.ostusa.com/recipes/brisket' ),
   author: () => author1,
-  notes: () => [note1],
-  steps: async () => {
-    await sleep( 5000 );
-    return [recipeStep1];
+  notes: () => [note1, note2],
+  steps: async ( args ) => {
+    const result = [];
+
+    await sleep( 1000 );
+    result.push( recipeStep1 );
+
+    if( args.first === true )
+      return result;
+
+    await sleep( 3000 );
+    result.push( recipeStep2 );
+
+    return result;
   }
 };
 
+// Recipe Notes
 const note1 = {
   id: 'e86db7b8-e314-400d-bb75-fcbb3044526d',
   title: 'Note 1',
@@ -33,17 +51,32 @@ const note1 = {
   recipe: recipe1
 };
 
+const note2 = {
+  id: 'e86db7b8-e314-400d-bb75-fcbb3044526c',
+  title: 'Note 2',
+  body: 'This is another note',
+  recipe: recipe1
+};
+
+// Recipe Steps
 const recipeStep1 = {
   id: '31e4b851-608e-48e6-a9f6-8e94b9cb1027',
   step: 1,
-  instructions: 'Boil the water',
+  instructions: 'Coat meat liberally with beef rub. When seasoned, wrap brisket in plastic wrap. Transfer wrapped brisket to the refrigerator and let sit for 12 to 24 hours.',
+  recipe: () => recipe1
+};
+
+const recipeStep2 = {
+  id: '31e4b851-608e-48e6-a9f6-8e94b9cb1027',
+  step: 2,
+  instructions: 'When ready to cook, set temperature to 225℉ and preheat, lid closed for 15 minutes.',
   recipe: () => recipe1
 };
 
 const resolvers = {
   recipes: [recipe1],
-  recipe: args => recipe1,
-  authors: [author1],
+  recipe: () => recipe1,
+  authors: [author1, author2],
   notes: [note1]
 };
 

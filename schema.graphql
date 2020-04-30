@@ -13,9 +13,9 @@ type Query {
 type Recipe {
   id: ID!
   title: String
-  name: String @deprecated( reason: "No longer used" )
+  name: String @deprecated( reason: "Moved to title" )
   "The steps involved in cooking the recipe"
-  steps: [RecipeStep]
+  steps( first:Boolean ): [RecipeStep]
   "The initial creator for the recipe"
   author: Author
   "URL for the recipe"
@@ -35,10 +35,11 @@ type RecipeStep{
 
 type Author {
   id: ID!
-  avatar: Avatar
-  name: String
+  nickname: String
   "Homepage for this Author"
   website: String
+  "Image for this Author"
+  avatar: Avatar
   "The recipes this author has created"
   recipes: [Recipe]
 }
