@@ -1,4 +1,4 @@
-# receipe-api-graphql
+# recipe-api-graphql
 Exploring GraphQL
 
 ## Setup
