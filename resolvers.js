@@ -10,7 +10,7 @@ const author1 = {
   id: '95c5e2a5-30dd-4348-8ab3-aa2da90cdc29',
   nickname: 'The Chef',
   website: 'https://www.ostusa.com',
-  recipes: () => [recipe1]
+  recipes: () => [recipe1,recipe2]
 };
 
 const author2 = {
@@ -18,6 +18,13 @@ const author2 = {
   nickname: 'The Other Chef',
   website: 'https://www.ostusa.com',
   recipes: () => []
+};
+
+const recipe2 = {
+  id: '7efdaa71-90c5-4f13-9425-006bb68e2edf',
+  title: 'Pulled Pork',
+  url: args => url( args.w, args.h, 'https://www.ostusa.com/recipes/pulled-pork' ),
+  author: () => author1
 };
 
 const recipe1 = {
@@ -73,11 +80,24 @@ const recipeStep2 = {
   recipe: () => recipe1
 };
 
+const drink1 = {
+  __typename: 'Drink',
+  id: 'drink1',
+  name: 'Coffee'
+};
+
+const food1 = {
+  __typename: 'Food',
+  id: 'food1',
+  title: 'Maple syrup'
+};
+
 const resolvers = {
-  recipes: [recipe1],
+  recipes: [recipe1,recipe2],
   recipe: () => recipe1,
   authors: [author1, author2],
-  notes: [note1]
+  notes: [note1],
+  ingredients: [drink1,food1]
 };
 
 module.exports = resolvers;

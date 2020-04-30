@@ -7,6 +7,8 @@ type Query {
   authors: [Author]
   "The notes collection"
   notes: [Note]
+  "The ingredient collection"
+  ingredients: [Ingredient]
 }
 
 """Define a recipe"""
@@ -58,3 +60,15 @@ type Note {
   "Parent recipe"
   recipe: Recipe
 }
+
+type Food {
+  id: ID!
+  title: String
+}
+
+type Drink {
+  id: ID!
+  name: String
+}
+
+union Ingredient = Food | Drink

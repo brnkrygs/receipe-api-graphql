@@ -12,11 +12,31 @@ query listRecipesWithUrl{
   }
 }
 
-query listRecipes{
+query listRecipesWithAuthor{
   recipes{
     id
     title
     name
+    author{
+      id
+      nickname
+    }
+  }
+}
+
+query listRecipesWithAuthorWithRecipes{
+  recipes{
+    id
+    title
+    name
+    author{
+      id
+      nickname
+      recipes{
+        id
+        title
+      }
+    }
   }
 }
 
@@ -33,3 +53,48 @@ query listRecipesWithNotes{
   }
 }
 
+query listRecipesWithSteps{
+  recipes{
+    id
+    title
+    steps{
+      id
+      step
+      instructions
+    }
+  }
+}
+
+query listRecipesWithFirstStep{
+  recipes{
+    id
+    title
+    steps(first: true){
+      id
+      step
+      instructions
+    }
+  }
+}
+
+query listRecipesWithDeprecation{
+  recipes{
+    id
+    title
+    name
+  }
+}
+
+query listIngredients{
+  ingredients{
+    __typename
+    ...on Food{
+      id
+      title
+    }
+    ...on Drink{
+      id
+      name
+    }
+  }
+}
