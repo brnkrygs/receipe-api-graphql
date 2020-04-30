@@ -69,6 +69,7 @@ type Food {
 type Drink {
   id: ID!
   name: String
+  isCarbonated: Boolean
 }
 
 union Ingredient = Food | Drink

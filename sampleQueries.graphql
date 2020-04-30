@@ -93,8 +93,13 @@ query listIngredients{
       title
     }
     ...on Drink{
-      id
-      name
+      ...drink
     }
   }
+}
+
+fragment drink on Drink{
+  id
+  name
+  isCarbonated
 }

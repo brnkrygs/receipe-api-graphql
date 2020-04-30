@@ -82,13 +82,21 @@ const recipeStep2 = {
 
 const drink1 = {
   __typename: 'Drink',
-  id: 'drink1',
-  name: 'Coffee'
+  id: 'dc57eaf0-b216-4bb5-8f0a-a734312b8310',
+  name: 'Coffee',
+  isCarbonated: false,
+};
+
+const drink2 = {
+  __typename: 'Drink',
+  id: 'cc57eaf0-b216-4bb5-8f0a-a734312b8310',
+  name: 'Beer',
+  isCarbonated: true,
 };
 
 const food1 = {
   __typename: 'Food',
-  id: 'food1',
+  id: '5a59ee00-4680-4d53-97db-6e77f51f6ab2',
   title: 'Maple syrup'
 };
 
@@ -97,7 +105,7 @@ const resolvers = {
   recipe: () => recipe1,
   authors: [author1, author2],
   notes: [note1],
-  ingredients: [drink1,food1]
+  ingredients: [drink1,drink2,food1]
 };
 
 module.exports = resolvers;
