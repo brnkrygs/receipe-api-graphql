@@ -1,5 +1,6 @@
 const fs = require( 'fs' );
 const express = require( 'express' );
+const bodyParser = require( 'body-parser' );
 const graphqlHTTP = require( 'express-graphql' );
 const { buildSchema } = require( 'graphql' );
 
@@ -13,6 +14,14 @@ const schema = buildSchema( schemaContent );
 const app = express();
 const port = 4000;
 
+function logger( req, res, next ){
+  console.log( '[request.headers]:', req.headers );
+  console.log( '[request.body]:', req.body );
+  next(); // Passing the request to the next handler in the stack.
+}
+
+app.use( bodyParser.json() );
+app.use( logger );
 app.use( '/graphql', graphqlHTTP( {
   schema: schema,
   rootValue: root,
